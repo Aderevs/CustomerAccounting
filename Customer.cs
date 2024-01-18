@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerAccounting
 {
@@ -58,5 +54,6 @@ namespace CustomerAccounting
             string customerInfo = $"Arrival time: {arrivalTime}\tLeave time: {leaveTime}";
             return customerInfo;
         }
+
     }
 }

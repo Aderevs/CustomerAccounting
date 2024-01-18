@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace CustomerAccounting
 {
@@ -29,7 +27,7 @@ namespace CustomerAccounting
         {
             for (int i = 0; i < queue.Count; i++)
             {
-                if (queue[i].LeaveTime <customer.ArrivalTime)
+                if (queue[i].LeaveTime < customer.ArrivalTime)
                 {
                     CustomerLeave(queue[i]);
                     i--;
@@ -62,6 +60,55 @@ namespace CustomerAccounting
             else
             {
                 isBarberfree = true;
+            }
+        }
+        public Customer[] ReadCustomersFromFileTxt(string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                int counter = -1;
+                int numberOfCustomers;
+                Customer[] customers;
+                string line;
+                string[] splitValues;
+                byte arrivalHours, arrivalMinutes, patienceValue;
+
+                if (int.TryParse(reader.ReadLine(), out numberOfCustomers))
+                {
+                    customers = new Customer[numberOfCustomers];
+                }
+                else
+                {
+                    throw new FormatException("invalid format in 1 line of input file");
+                }
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (counter >= 0)
+                    {
+                        splitValues = line.Split(' ');
+
+                        if (splitValues.Length == 3)
+                        {
+                            if (byte.TryParse(splitValues[0], out arrivalHours) &&
+                                byte.TryParse(splitValues[1], out arrivalMinutes) &&
+                                byte.TryParse(splitValues[2], out patienceValue))
+                            {
+                                customers[counter] = new Customer(new TimeOfDay(arrivalHours, arrivalMinutes), patienceValue);
+                            }
+                            else
+                            {
+                                throw new FormatException($"invalid format in {counter + 1} line of inout file");
+                            }
+                        }
+                        else
+                        {
+                            throw new ArgumentException("It wasn't possible to obtain the required values for three variables");
+                        }
+                    }
+                    counter++;
+                }
+                return customers;
             }
         }
     }

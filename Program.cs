@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CustomerAccounting
+﻿namespace CustomerAccounting
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            List<Customer> inputCustomers = new List<Customer>();
+            /*List<Customer> inputCustomers = new List<Customer>();
             Barbershop barbershop = new Barbershop();
             inputCustomers.Add(new Customer(new TimeOfDay(8, 0), 3));
             inputCustomers.Add(new Customer(new TimeOfDay(8, 3), 5));
@@ -23,11 +17,11 @@ namespace CustomerAccounting
                 barbershop.CustomerArrive(customer);
             }
             var outputCustomers = barbershop.TodayCustomers;
-            Console.WriteLine("-----------------------------------\n\n\n\n");
+
             foreach (var customer in outputCustomers)
             {
                 Console.WriteLine(customer);
-            }
+            }*/
         }
     }
 }
