@@ -115,5 +115,22 @@ namespace CustomerAccounting
                 return customers;
             }
         }
+
+        public void WriteResultOfDayToFileTxt(string filePath)
+        {
+            TimeOfDay[] leavingTimes = new TimeOfDay[todayCustomers.Count];
+            for (int i = 0; i < leavingTimes.Length; i++)
+            {
+                leavingTimes[i] = todayCustomers[i].LeaveTime;
+            }
+            using(StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine(leavingTimes.Length);
+                foreach (var item in leavingTimes)
+                {
+                    writer.WriteLine(item);
+                }
+            }
+        }
     }
 }

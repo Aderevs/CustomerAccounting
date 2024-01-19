@@ -9,6 +9,7 @@ namespace CustomerAccounting
         {
             Barbershop barbershop = new Barbershop();
             string inputFilePath = "E:\\CyberByonicSystematics\\TermProjects\\Essential.Console\\CustomerAccounting\\input.txt";
+            string outputFilePath = "E:\\CyberByonicSystematics\\TermProjects\\Essential.Console\\CustomerAccounting\\output.txt";
             try
             {
                 List<Customer> inputCustomers = new List<Customer>(barbershop.ReadCustomersFromFileTxt(inputFilePath));
@@ -16,8 +17,10 @@ namespace CustomerAccounting
                 {
                     barbershop.CustomerArrive(customer);
                 }
-                var outputCustomers = barbershop.TodayCustomers;
 
+                barbershop.WriteResultOfDayToFileTxt(outputFilePath);
+
+                var outputCustomers = barbershop.TodayCustomers;
                 foreach (var customer in outputCustomers)
                 {
                     Console.WriteLine(customer);
