@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CustomerAccounting
 {
@@ -119,10 +120,8 @@ namespace CustomerAccounting
         public void WriteResultOfDayToFileTxt(string filePath)
         {
             TimeOfDay[] leavingTimes = new TimeOfDay[todayCustomers.Count];
-            for (int i = 0; i < leavingTimes.Length; i++)
-            {
-                leavingTimes[i] = todayCustomers[i].LeaveTime;
-            }
+            leavingTimes = todayCustomers.Select(cust=> cust.LeaveTime).ToArray();
+
             using(StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.WriteLine(leavingTimes.Length);
