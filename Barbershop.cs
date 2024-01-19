@@ -9,20 +9,16 @@ namespace CustomerAccounting
     {
         private TimeOfDay timeLastCustomerStart;
         private List<Customer> queue;
-        private List<Customer> todayCustomers;
         private bool isBarberfree;
         private const int ServeOneCustomerMinutes = 20;
 
         public Barbershop()
         {
             queue = new List<Customer>();
-            todayCustomers = new List<Customer>();
+            TodayCustomers = new List<Customer>();
             isBarberfree = true;
         }
-        public List<Customer> TodayCustomers
-        {
-            get { return todayCustomers; }
-        }
+        public List<Customer> TodayCustomers { get; }
 
         public void CustomerArrive(Customer customer)
         {
@@ -55,7 +51,7 @@ namespace CustomerAccounting
                 }
             }
             customer.LeaveTime = leaving;
-            todayCustomers.Add(customer);
+            TodayCustomers.Add(customer);
         }
         private void CustomerLeave(Customer customer)
         {
@@ -119,15 +115,12 @@ namespace CustomerAccounting
 
         public void WriteResultOfDayToFileTxt(string filePath)
         {
-            TimeOfDay[] leavingTimes = new TimeOfDay[todayCustomers.Count];
-            leavingTimes = todayCustomers.Select(cust=> cust.LeaveTime).ToArray();
-
-            using(StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.WriteLine(leavingTimes.Length);
-                foreach (var item in leavingTimes)
+                writer.WriteLine(TodayCustomers.Count);
+                foreach (var item in TodayCustomers)
                 {
-                    writer.WriteLine(item);
+                    writer.WriteLine(item.LeaveTime);
                 }
             }
         }
