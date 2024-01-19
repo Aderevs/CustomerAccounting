@@ -19,6 +19,7 @@ namespace CustomerAccounting
         {
             get { return hours; }
 
+            //prevent the hours value from overflowing
             set
             {
                 if (value < 24)
@@ -34,6 +35,8 @@ namespace CustomerAccounting
         public int Minutes
         {
             get { return minutes; }
+
+            //use Hours (property) to prevent the hours value from overflowing, but it is allowed to overflow the minutes value
             set
             {
                 if (value < 60)
@@ -44,11 +47,11 @@ namespace CustomerAccounting
                 {
                     if (hours + value / 60 < 24)
                     {
-                        hours += (byte)(value / 60);
+                        Hours += (byte)(value / 60);
                     }
                     else
                     {
-                        hours = (byte)((hours + value / 60) % 24);
+                        Hours = (byte)(hours + value / 60);
                     }
                     minutes = (byte)(value % 60);
                 }
