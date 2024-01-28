@@ -8,8 +8,8 @@ namespace CustomerAccounting
         static void Main(string[] args)
         {
             Barbershop barbershop = new Barbershop();
-            string inputFilePath = "E:\\CyberByonicSystematics\\TermProjects\\Essential.Console\\CustomerAccounting\\input.txt";
-            string outputFilePath = "E:\\CyberByonicSystematics\\TermProjects\\Essential.Console\\CustomerAccounting\\output.txt";
+            string inputFilePath = "input.txt";
+            string outputFilePath = "output.txt";
             try
             {
                 List<Customer> inputCustomers = new List<Customer>(barbershop.ReadCustomersFromFileTxt(inputFilePath));

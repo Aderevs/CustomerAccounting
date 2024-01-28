@@ -117,7 +117,7 @@ namespace CustomerAccounting
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.WriteLine(TodayCustomers.Count);
+                //writer.WriteLine(TodayCustomers.Count);
                 foreach (var item in TodayCustomers)
                 {
                     writer.WriteLine(item.LeaveTime);
